@@ -1,7 +1,7 @@
 package algorithms;
 
 public class EditDistance {
-    public int minDistance(String word1, String word2) {
+    public static int minDistance(String word1, String word2) {
         int m = word1.length();
         int n = word2.length();
 
@@ -11,12 +11,10 @@ public class EditDistance {
             cache[m][j] = n - j;
         }
 
-        // Initialize base cases for the last column
         for (int i = 0; i <= m; i++) {
             cache[i][n] = m - i;
         }
 
-        // Fill the cache bottom-up from the end of the strings
         for (int i = m - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
                 if (word1.charAt(i) == word2.charAt(j)) {
