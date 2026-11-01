@@ -1,5 +1,10 @@
 import algorithms.*;
 void main() {
-    System.out.println(StringMatching.naive("soippopa", "pp"));
-    System.out.println(KMP.search("soippopa", "pp"));
+    try {
+        Experiments.run();
+        Tests.run();
+    }
+    catch (Exception e){
+        System.out.println(e.getMessage());
+    }
 }
