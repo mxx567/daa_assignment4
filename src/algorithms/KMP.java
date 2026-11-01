@@ -1,6 +1,30 @@
 package algorithms;
 
 public class KMP {
+    public static java.util.List<Integer> searchAll(String text, String pattern) {
+        java.util.List<Integer> matches = new java.util.ArrayList<>();
+        if (pattern.isEmpty()) {
+            for (int i = 0; i <= text.length(); i++) matches.add(i);
+            return matches;
+        }
+        int[] lps = buildLPS(pattern);
+        int i = 0, j = 0;
+        while (i < text.length()) {
+            if (text.charAt(i) == pattern.charAt(j)) {
+                i++;
+                j++;
+                if (j == pattern.length()) {
+                    matches.add(i - j);
+                    j = lps[j - 1]; // Preserve overlapping matches.
+                }
+            } else if (j > 0) {
+                j = lps[j - 1];
+            } else {
+                i++;
+            }
+        }
+        return matches;
+    }
 
     public static int search(String text, String pattern) {
         if (pattern.isEmpty()) {
